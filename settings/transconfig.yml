@@ -1,0 +1,7 @@
+# This is the commands name
+TranslateCommand: "translate"
+# This is the transcription of the command for the help command
+TranslateCommandDesc: "Translates the language provided, along with the abbreviation (2 char) long language code"
+
+# This is the channel in which translations will be logged to
+TranslateLogChannel: "translations"
