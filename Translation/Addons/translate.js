@@ -7,13 +7,13 @@ const transconfig = yaml.load (fs.readFileSync('./Addons/settings/transconfig.ym
 const { Command } = require("../Structures/Addon");
 
 
-module.exports.commands = new Command({
+module.exports.commands = [ new Command({
 
   name: transconfig.TranslateCommand, // Name of command
   description: transconfig.TranslateDesc, // Description of command
   usage: "/translate [en] [text]", // How to use the command
   options: [
-    {"StringChoices": { name: "language", description: "A 2 letter language code", required: true, choices: 
+    {type: "StringChoices", name: "language", description: "A 2 letter language code", required: true, choices: 
       [
         [
           "English", "en"
@@ -28,8 +28,8 @@ module.exports.commands = new Command({
           "Italian", "it"
         ]
       ]
-    }},
-    {"String": { name: "text", description: "The text to translate", required: true }} // The input text for the translation
+    },
+    {type: "String", name: "text", description: "The text to translate", required: true } // The input text for the translation
 
   ],
   permissions: ["SEND_MESSAGES"], // The permission the user/role at least requires
@@ -121,7 +121,8 @@ module.exports.commands = new Command({
     console.log('Faced an issue while translating', e)
   }
 
-});
+})
+];                           
 
 /** 
 * @INFO 
