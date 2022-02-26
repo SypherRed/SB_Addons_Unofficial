@@ -62,10 +62,10 @@ module.exports.commands = [ new Command({
 
     let args = interaction.options.getString("language"); // Grab choice of language code by user
     let url = "https://www.science.co.il/language/Codes.php" // URL to all available language codes
-    let text = await interaction.options.getString("text");
+    let text = await interaction.options.getString("text"); // Grab the text to translate by the user
     let translatelog = await getChannel(transconfig.TranslateLogChannel, interaction.guild); // Grab the set logging channel for translations
 
-    const result = await translate(text, { to: language });
+    const result = await translate(text, { to: args });
 
     // Return message if user has not provided any language code
     if (!args) return interaction.reply(new Discord.MessageEmbed()
