@@ -5,6 +5,6 @@ Very first release to figure stuff out with this bot was the translation command
 
 ### Translation Command How to:
 
-* Set your desired config parameters in "/Addons/settings/transconfig.yml"
+* Set your desired config parameters in "/Addons/Configs/translate.yml"
 * Create the channel for logging translations to (e.g. translations)
-* Do "npm install @vitalets/google-translate-api"
+* Do "npm i @vitalets/google-translate-api"
