@@ -3,7 +3,7 @@ const fs = require("fs");
 const Discord = require("discord.js");
 const yaml = require("js-yaml");
 const supportbot = yaml.load( fs.readFileSync("./Configs/supportbot.yml", "utf8") );
-const transconfig = yaml.load (fs.readFileSync('./Addons/Settings/transconfig.yml', 'utf8') );
+const transconfig = yaml.load (fs.readFileSync('./Addons/settings/transconfig.yml', 'utf8') );
 const { Command } = require("../Structures/Addon");
 
 
