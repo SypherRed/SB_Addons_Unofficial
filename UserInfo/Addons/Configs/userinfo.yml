@@ -1,0 +1,5 @@
+# This is the commands name
+UserInfoCommand: "userinfo"
+
+# This is the description of the command
+UserInfoCommandDesc: "Get info about a specific user."
