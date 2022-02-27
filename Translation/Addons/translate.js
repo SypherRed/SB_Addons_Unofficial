@@ -8,6 +8,7 @@ const supportbot = yaml.load(
 const config = yaml.load(
   fs.readFileSync("./Addons/Configs/translate.yml", "utf8")
 );
+
 const { Command } = require("../Structures/Addon");
 
 const translate = require("@vitalets/google-translate-api"); // Require this dependency and load it in
@@ -16,7 +17,6 @@ module.exports.commands = [
   new Command({
     name: config.TranslateCommand, // Name of command
     description: config.TranslateCommandDesc, // Description of command
-    usage: "/translate [en] [text]", // How to use the command
     options: [
       {
         type: "STRING",
@@ -32,7 +32,9 @@ module.exports.commands = [
       }, // The input text for the translation
     ],
     permissions: ["SEND_MESSAGES"], // The permission the user/role at least requires
+
     async run(interaction) {
+
       const { getChannel } = interaction.client;
       let lang = interaction.options.getString("language"); // Grab choice of language code by user
       let url = "https://www.science.co.il/language/Codes.php"; // URL to all available language codes
@@ -42,8 +44,8 @@ module.exports.commands = [
         interaction.guild
       ); // Grab the set logging channel for translations
 
-      // Return message if user has provided a language code less than [2] or more than [2] letters
 
+      // Return message if user has provided an invalid language code
       const result = await translate(text, { to: lang }).catch(async (err) => {
         if (err && err.code == 400) {
           await interaction.reply({
@@ -53,7 +55,7 @@ module.exports.commands = [
                 .setTitle("Valid Language Codes")
                 .setURL(url)
                 .setDescription(
-                  "**Click the title to see which 2 letter language codes are valid.**"
+                  "Click the title to see which 2 letter language codes are valid."
                 ),
             ],
             ephemeral: true,
@@ -61,22 +63,26 @@ module.exports.commands = [
         }
       });
       if (!result) return;
-      // Embed containing with language code and translated text
-      let trans = new Discord.MessageEmbed()
-        .setAuthor({
-          name: interaction.user.tag,
-          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
-        })
+
+      // Embed containing language code, original text and translated text
+      let transembed = new Discord.MessageEmbed()
+        .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
         .setColor(supportbot.SuccessColour)
-        .setDescription(`**Translated to ${lang}**\n${result.text}`)
+        .setDescription(`**Translation to ${lang}**`)
+        .addFields(
+          { name: "Original text", value: text },
+          { name: "Translated text", value: result.text },
+        )
+        .setFooter({ text: `Author: ${interaction.user.id}` })
         .setTimestamp();
 
-      // Edit
-      await interaction.reply({ embeds: [trans] });
+      // Send embed [transembed] with translated message to channel
+      await interaction.reply({ embeds: [transembed] });
 
-      // Send embed [trans] to logging channel and catch errors to console
-      await translatelog.send({ embeds: [trans] });
+      // Send embed [transembed] to logging channel
+      await translatelog.send({ embeds: [transembed] });
     },
+    
   }),
 ];
 
@@ -84,7 +90,7 @@ module.exports.commands = [
  * @INFO
  * Translate command addon by Sypher#3415 | 321332200668790786
  * @INFO
- * Created for v7.4.2
+ * Created for v7.4.2 and higher
  * @INFO
  * Solely created for SupportBot | https://github.com/Emerald-Services/SupportBot/
  **/
