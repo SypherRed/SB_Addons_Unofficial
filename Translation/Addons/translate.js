@@ -8,9 +8,7 @@ const supportbot = yaml.load(
 const config = yaml.load(
   fs.readFileSync("./Addons/Configs/translate.yml", "utf8")
 );
-
 const { Command } = require("../Structures/Addon");
-
 const translate = require("@vitalets/google-translate-api"); // Require this dependency and load it in
 
 module.exports.commands = [
@@ -34,6 +32,27 @@ module.exports.commands = [
     permissions: ["SEND_MESSAGES"], // The permission the user/role at least requires
 
     async run(interaction) {
+
+      const { getRole } = interaction.client;
+      let SupportStaff = await getRole(supportbot.Staff, interaction.guild);
+      let Admin = await getRole(supportbot.Admin, interaction.guild);
+        if (!SupportStaff || !Admin)
+          return interaction.reply(
+            "Some roles seem to be missing!\nPlease check the error logs."
+          );
+
+      const NoPerms = new Discord.MessageEmbed()
+        .setTitle("Invalid Permissions!")
+        .setDescription(
+          `${supportbot.IncorrectPerms}\n\nRole Required: \`${supportbot.Staff}\` or \`${supportbot.Admin}\``
+        )
+        .setColor(supportbot.WarningColour);
+
+      if (
+        !interaction.member.roles.cache.has(SupportStaff.id) &&
+        !interaction.member.roles.cache.has(Admin.id)
+      )
+        return interaction.reply({ embeds: [NoPerms] });
 
       const { getChannel } = interaction.client;
       let lang = interaction.options.getString("language"); // Grab choice of language code by user
