@@ -13,3 +13,8 @@ Very first release to figure stuff out with this bot was the translation command
 
 * Set your desired config parameters in "/Addons/Configs/userinfo.yml"
 * Do "npm i moment"
+
+### Minecraft UserInfo Command How to:
+
+* Set your desired config parameters in "/Addons/Configs/MCUser.yml"
+* Do "npm i axios"
