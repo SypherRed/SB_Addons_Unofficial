@@ -1,0 +1,3 @@
+MCUserCommand: "mcuser"
+
+MCUserDesc: "Provides info about a given minecraft username."
