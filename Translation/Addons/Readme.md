@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-    <a href="https://emeraldsrv.dev/resources/resource/17-translation-addon--supportbot/"><img scr="https://i.imgur.com/TOv9BiS.png"></a>
+    <a href="https://emeraldsrv.dev/resources/resource/17-translation-addon--supportbot/"><img scr="./assets/images/translate-icon.png"></a>
   <br>
   Translation Command
   <br>
