@@ -1,0 +1,8 @@
+# This is the commands name
+ChatTranscriptCommandName: "chattranscript"
+
+# This is the description of the command for the help command display
+ChatTranscriptCommandDesc: "Saves the chat history of a given channel to a defined logging channel"
+
+# This is the channel in which translations will be logged to
+ChatTranscriptLogChannel: "chat-logs"
