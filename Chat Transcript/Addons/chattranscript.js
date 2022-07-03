@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const Discord = require("discord.js");
-const Command = require("../Structures/Addon");
+const { Command } = require("../Structures/Addon");
 const yaml = require("js-yaml");
 const { createTranscript } = require("discord-html-transcripts");
 
